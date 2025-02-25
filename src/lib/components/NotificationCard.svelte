@@ -14,27 +14,63 @@
 	}
 </script>
 
-<div class="border border-neutral rounded-lg p-4 w-full max-w-xl bg-base-100">
-	<h3 class="font-semibold">{notification.title}</h3>
-	<p class="text-base-content text-sm mt-1">{@html marked(notification.description)}</p>
-	<div class="mt-2 flex gap-2 items-center">
-		{#if notification.status}
-			<span class="text-xs {statusClass} px-2 py-1 rounded">
-				{formatStatus(notification.status)}
+{#if notification.link}
+	<a
+		href={notification.link}
+		target="_blank"
+		rel="noopener noreferrer"
+		class="block no-underline hover:no-underline"
+	>
+		<div
+			class="border border-neutral rounded-lg p-4 w-full max-w-xl bg-base-100 hover:bg-base-200/50 dark:hover:bg-base-300/50 transition-colors duration-200"
+		>
+			<h3 class="font-semibold">{notification.title}</h3>
+			<p class="text-base-content text-sm mt-1">{@html marked(notification.description)}</p>
+			<div class="mt-2 flex gap-2 items-center">
+				{#if notification.status}
+					<span class="text-xs {statusClass} px-2 py-1 rounded">
+						{formatStatus(notification.status)}
+					</span>
+				{/if}
+				<span class="text-xs text-base-content opacity-60">
+					Published {new Date(notification.publish_date).toLocaleDateString()}
+				</span>
+				{#if notification.link}
+					<a
+						href={notification.link}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="text-primary underline text-sm ml-auto hover:text-primary-focus z-10 relative"
+					>
+						View full details →
+					</a>
+				{/if}
+			</div>
+		</div>
+	</a>
+{:else}
+	<div class="border border-neutral rounded-lg p-4 w-full max-w-xl bg-base-100">
+		<h3 class="font-semibold">{notification.title}</h3>
+		<p class="text-base-content text-sm mt-1">{@html marked(notification.description)}</p>
+		<div class="mt-2 flex gap-2 items-center">
+			{#if notification.status}
+				<span class="text-xs {statusClass} px-2 py-1 rounded">
+					{formatStatus(notification.status)}
+				</span>
+			{/if}
+			<span class="text-xs text-base-content opacity-60">
+				Published {new Date(notification.publish_date).toLocaleDateString()}
 			</span>
-		{/if}
-		<span class="text-xs text-base-content opacity-60">
-			Published {new Date(notification.publish_date).toLocaleDateString()}
-		</span>
-		{#if notification.link}
-			<a
-				href={notification.link}
-				target="_blank"
-				rel="noopener noreferrer"
-				class="text-primary underline text-sm ml-auto"
-			>
-				View full details →
-			</a>
-		{/if}
+			{#if notification.link}
+				<a
+					href={notification.link}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="text-primary underline text-sm ml-auto"
+				>
+					View full details →
+				</a>
+			{/if}
+		</div>
 	</div>
-</div>
+{/if}
