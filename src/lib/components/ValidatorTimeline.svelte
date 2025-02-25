@@ -76,6 +76,6 @@
 				/>
 			</svg>
 		</div>
-		<hr />
+		<hr class="bg-primary" />
 	</li>
 </ul>

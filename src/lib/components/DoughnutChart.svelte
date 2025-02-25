@@ -34,9 +34,31 @@
 			ctx.textAlign = 'center';
 			ctx.textBaseline = 'middle';
 			ctx.font = 'normal 1rem sans-serif';
+
 			const text = centerText;
 			const centerX = (chartArea.left + chartArea.right) / 2;
 			const centerY = (chartArea.top + chartArea.bottom) / 2;
+
+			// Measure text width to create appropriate background
+			const textMetrics = ctx.measureText(text);
+			const padding = 6;
+			const bgWidth = textMetrics.width + padding * 2;
+			const bgHeight = 26; // Approximate height based on font size
+
+			// Draw rounded rectangle background
+			ctx.fillStyle = '#141414';
+			ctx.beginPath();
+			ctx.roundRect(
+				centerX - bgWidth / 2,
+				centerY - bgHeight / 2,
+				bgWidth,
+				bgHeight,
+				6 // Border radius
+			);
+			ctx.fill();
+
+			// Draw text
+			ctx.fillStyle = 'white';
 			ctx.fillText(text, centerX, centerY);
 			ctx.restore();
 		}
@@ -63,7 +85,15 @@
 				: (evt.chart.canvas.style.cursor = 'default');
 		},
 		plugins: {
-			legend: { position: legendPosition },
+			legend: {
+				position: legendPosition,
+				labels: {
+					color: '#6E7070',
+					font: {
+						weight: 'bolder'
+					}
+				}
+			},
 			datalabels: {
 				display: function (context) {
 					const value = context.dataset.data[context.dataIndex];
