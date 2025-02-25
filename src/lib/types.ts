@@ -107,6 +107,7 @@ export const SourceSchema = z.object({
 	recipient: z.string(),
 	sender: z.string(),
 	type: z.enum(['CEX API', 'DEX LP']),
+	status: z.enum(['active', 'inactive', '']).transform((val) => val ?? 'inactive'),
 	website: z.string(),
 	image_path: z.string(),
 	background_color: z.string(),

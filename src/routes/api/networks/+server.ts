@@ -33,7 +33,7 @@ async function getNetworksWithMetadata(db: PocketBase): Promise<NetworkWithMetad
 					totalFacts: await getAllFactsCount(db, network),
 					totalFacts24Hour: await getTodaysFactsCount(db, network),
 					nodes: network.nodes,
-					sources: network.sources,
+					sources: network.sources.filter((source) => source.status === 'active'),
 					totalActiveFeeds: network.feeds.filter((feed) => feed.status === 'active').length
 				}
 			}))

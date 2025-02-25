@@ -12,8 +12,8 @@
 			alt="The Orcfax logo, an Orca jumping"
 		/>
 		<div class="flex-col pl-5">
-			<h2 class="text-base-100-content text-4xl font-bold mt-2 -ml-8 ld:-ml-6">Orcfax</h2>
-			<h3 class="animate-pulse text-primary text-3xl font-extrabold -mt-3 pl-0 lg:pl-2">Status</h3>
+			<h2 class="text-base-100-content text-3xl font-bold mt-2 -ml-8 ld:-ml-6">Orcfax</h2>
+			<h3 class="animate-pulse text-primary text-2xl font-extrabold -mt-3 pl-0 lg:pl-2">status</h3>
 		</div>
 	</a>
 	<div class="flex gap-2 items-center mt-2">

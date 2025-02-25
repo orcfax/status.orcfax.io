@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { RSSFeedItem } from '$lib/types';
+	import { marked } from 'marked';
 
 	export let notification: RSSFeedItem;
 	export let statusClass = ''; // For custom status colors
@@ -13,9 +14,9 @@
 	}
 </script>
 
-<div class="border border-neutral rounded-lg p-4 w-full bg-base-100">
+<div class="border border-neutral rounded-lg p-4 w-full max-w-xl bg-base-100">
 	<h3 class="font-semibold">{notification.title}</h3>
-	<p class="text-base-content text-sm mt-1">{notification.description}</p>
+	<p class="text-base-content text-sm mt-1">{@html marked(notification.description)}</p>
 	<div class="mt-2 flex gap-2 items-center">
 		{#if notification.status}
 			<span class="text-xs {statusClass} px-2 py-1 rounded">

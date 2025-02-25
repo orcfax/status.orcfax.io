@@ -78,7 +78,7 @@
 				bind:value={searchQuery}
 				name="tableSearchInput"
 				id="tableSearchInput"
-				class="block w-full rounded-none rounded-l-md border border-gray-200 py-2.5 pl-4 bg-secondary text-secondary-content placeholder:text-secondary-content/50"
+				class="block w-full rounded-none rounded-l-md border border-neutral py-2.5 pl-4 bg-secondary text-secondary-content placeholder:text-secondary-content/50"
 				placeholder="Wallet Address"
 			/>
 			{#if searchQuery !== ''}
@@ -107,32 +107,32 @@
 	<div class="mt-4 flow-root xl:min-w-full">
 		<div class="flex justify-center mx-0 sm:-mx-4 -my-2 md:-mx-6 lg:-mx-8">
 			<div
-				class="inline-block min-w-max py-2 align-middle shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg"
+				class="inline-block min-w-max py-2 align-middle shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg bg-secondary"
 			>
 				<table class="min-w-full border-separate border-spacing-0">
 					<thead class="bg-secondary table-head">
 						<tr>
 							<th
 								scope="col"
-								class="sticky top-0 z-10 border-b border-gray-300 bg-opacity-75 py-3.5 px-1 pl-2 sm:px-3 text-left text-sm font-semibold text-secondary-content backdrop-blur backdrop-filter"
+								class="sticky top-0 z-10 border-b border-neutral bg-opacity-75 py-3.5 px-1 pl-2 sm:px-3 text-left text-sm font-semibold text-secondary-content backdrop-blur backdrop-filter"
 							>
 								License(s)
 							</th>
 							<th
 								scope="col"
-								class="sticky hidden top-0 z-10 border-b border-gray-300 bg-opacity-75 px-1 sm:px-3 py-3.5 text-left text-sm font-semibold text-secondary-content backdrop-blur backdrop-filter lg:table-cell"
+								class="sticky hidden top-0 z-10 border-b border-neutral bg-opacity-75 px-1 sm:px-3 py-3.5 text-left text-sm font-semibold text-secondary-content backdrop-blur backdrop-filter lg:table-cell"
 							>
 								Stake Address
 							</th>
 							<th
 								scope="col"
-								class="sticky hidden top-0 z-10 border-b border-gray-300 bg-opacity-75 px-1 sm:px-3 py-3.5 text-left text-sm font-semibold text-secondary-content backdrop-blur backdrop-filter"
+								class="sticky hidden top-0 z-10 border-b border-neutral bg-opacity-75 px-1 sm:px-3 py-3.5 text-left text-sm font-semibold text-secondary-content backdrop-blur backdrop-filter"
 							>
 								{isSmall ? 'Address' : 'Payment Address'}
 							</th>
 							<th
 								scope="col"
-								class="sticky hidden top-0 z-10 border-b border-gray-300 bg-opacity-75 px-1 sm:px-3 py-3.5 text-center md:text-left text-sm font-semibold text-secondary-content backdrop-blur backdrop-filter xs:table-cell"
+								class="sticky hidden top-0 z-10 border-b border-neutral bg-opacity-75 px-1 sm:px-3 py-3.5 text-center md:text-left text-sm font-semibold text-secondary-content backdrop-blur backdrop-filter xs:table-cell"
 							>
 								<div
 									class="tooltip tooltip-bottom isolate z-20 w-[4rem] lg:w-max"
@@ -143,7 +143,7 @@
 							</th>
 							<th
 								scope="col"
-								class="sticky top-0 z-10 border-b border-gray-300 bg-opacity-75 px-1 sm:px-3 py-3.5 text-center text-sm font-semibold text-secondary-content backdrop-blur backdrop-filter"
+								class="sticky top-0 z-10 border-b border-neutral bg-opacity-75 px-1 sm:px-3 py-3.5 text-center text-sm font-semibold text-secondary-content backdrop-blur backdrop-filter"
 							>
 								<div
 									class="tooltip tooltip-bottom isolate z-20 w-[4rem] lg:w-max"
@@ -154,7 +154,7 @@
 							</th>
 							<th
 								scope="col"
-								class="sticky hidden top-0 z-10 border-b border-gray-300 bg-opacity-75 px-1 sm:px-3 py-3.5 text-left text-sm font-semibold text-secondary-content backdrop-blur backdrop-filter sm:table-cell"
+								class="sticky hidden top-0 z-10 border-b border-neutral bg-opacity-75 px-1 sm:px-3 py-3.5 text-left text-sm font-semibold text-secondary-content backdrop-blur backdrop-filter sm:table-cell"
 							>
 								<div
 									class="tooltip tooltip-bottom isolate z-20 w-[4rem] lg:w-max"
@@ -165,7 +165,7 @@
 							</th>
 							<th
 								scope="col"
-								class="sticky hidden top-0 z-10 border-b border-gray-300 bg-opacity-75 px-1 sm:px-3 py-3.5 text-center text-sm font-semibold text-secondary-content backdrop-blur backdrop-filter sm:table-cell"
+								class="sticky hidden top-0 z-10 border-b border-neutral bg-opacity-75 px-1 sm:px-3 py-3.5 text-center text-sm font-semibold text-secondary-content backdrop-blur backdrop-filter sm:table-cell"
 							>
 								<div
 									class="tooltip tooltip-bottom isolate z-20 w-[4rem] lg:w-max"
@@ -176,7 +176,7 @@
 							</th>
 							<th
 								scope="col"
-								class="sticky top-0 z-10 border-b border-gray-300 bg-opacity-75 px-1 sm:px-3 py-3.5 text-center text-sm font-semibold text-secondary-content backdrop-blur backdrop-filter"
+								class="sticky top-0 z-10 border-b border-neutral bg-opacity-75 px-1 sm:px-3 py-3.5 text-center text-sm font-semibold text-secondary-content backdrop-blur backdrop-filter"
 							>
 								<div
 									class="tooltip tooltip-bottom isolate z-20 w-[4rem] lg:w-max"
@@ -187,7 +187,7 @@
 							</th>
 							<th
 								scope="col"
-								class="sticky top-0 z-10 border-2 border-primary border-b border-b-gray-300 border-opacity-40 bg-opacity-75 bg-primary px-1 pr-2 sm:px-3 py-3.5 text-left text-sm font-semibold text-secondary-content backdrop-blur backdrop-filter"
+								class="sticky top-0 z-10 border-2 border-primary border-b border-b-neutral border-opacity-40 bg-opacity-75 bg-primary px-1 pr-2 sm:px-3 py-3.5 text-left text-sm font-semibold text-secondary-content backdrop-blur backdrop-filter"
 							>
 								<div
 									class="tooltip tooltip-bottom isolate z-20"

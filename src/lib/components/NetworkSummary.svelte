@@ -59,11 +59,11 @@
 
 						<div class="gap-4 mb-4 grid grid-cols-2">
 							<div class="stat-item min-w-[120px]">
-								<span class="text-sm text-gray-600">Active Feeds</span>
+								<span class="text-sm">Active Feeds</span>
 								<span class="text-lg font-semibold">{network.stats.totalActiveFeeds}</span>
 							</div>
 							<div class="stat-item min-w-[120px]">
-								<span class="text-sm text-gray-600">Total Facts</span>
+								<span class="text-sm">Total Facts</span>
 								<div>
 									<span class="text-lg font-semibold">{formatNumber(network.stats.totalFacts)}</span
 									>
@@ -93,7 +93,7 @@
 
 							<div class="grid grid-cols-2 gap-4">
 								<div class="stat-item min-w-[120px]">
-									<span class="text-sm text-gray-600">Data Sources</span>
+									<span class="text-sm">Data Sources</span>
 									{#if !network.name.toLowerCase().includes('preview')}
 										<span class="text-lg font-semibold">{network.stats.sources.length}</span>
 										{@const { dexLpCount, cexApiCount } = getSourceCounts(network.stats.sources)}
@@ -105,12 +105,12 @@
 									{/if}
 								</div>
 								<div class="stat-item min-w-[120px]">
-									<span class="text-sm text-gray-600">Oracle Nodes</span>
+									<span class="text-sm">Oracle Nodes</span>
 									{#if !network.name.toLowerCase().includes('preview')}
 										<div class="flex items-center gap-2">
 											<div class="flex items-center gap-1">
 												<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-												<span class="text-sm text-gray-600">
+												<span class="text-sm">
 													{network.stats.nodes.filter((n) => n.status === 'active').length} / {network
 														.stats.nodes.length} active
 												</span>
@@ -125,7 +125,7 @@
 
 						<div class="text-sm space-y-2">
 							<div class="flex gap-2 items-center">
-								<span class="text-gray-600">Last Block:</span>
+								<span>Last Block:</span>
 								<div class="tooltip tooltip-top" data-tip={network.last_block_hash}>
 									<span class="truncate inline-block underline">
 										{network.last_block_hash.slice(0, 16)}...
@@ -134,11 +134,11 @@
 								<CopyToClipboard value={network.last_block_hash} tooltipDirection="tooltip-left" />
 							</div>
 							<div class="flex gap-2 items-center">
-								<span class="text-gray-600">Last Checkpoint:</span>
+								<span>Last Checkpoint:</span>
 								<span>{network.last_checkpoint_slot}</span>
 							</div>
 							<div class="flex gap-2 items-center">
-								<span class="text-gray-600">Contract Address:</span>
+								<span>Contract Address:</span>
 								<div class="tooltip tooltip-top" data-tip={network.cardano_smart_contract_address}>
 									<a
 										href={`${network.block_explorer_base_url}/address/${network.cardano_smart_contract_address}`}

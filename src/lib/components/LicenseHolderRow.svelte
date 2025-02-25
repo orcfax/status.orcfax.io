@@ -28,7 +28,7 @@
 
 <svelte:window bind:innerWidth bind:innerHeight />
 
-<td class={`border-b border-gray-200 py-4 px-2 sm:px-3 text-sm font-medium text-secondary-content`}>
+<td class={`border-b border-neutral py-4 px-2 sm:px-3 text-sm font-medium text-secondary-content`}>
 	<div
 		class={`flex justify-center items-center tooltip tooltip-right`}
 		data-tip={getStatusTooltip(licenseHolder)}
@@ -71,7 +71,7 @@
 </td>
 
 <td
-	class="hidden border-b border-gray-200 py-4 px-2 sm:px-3 text-sm font-medium text-secondary-content lg:table-cell"
+	class="hidden border-b border-neutral py-4 px-2 sm:px-3 text-sm font-medium text-secondary-content lg:table-cell"
 >
 	{#if licenseHolder.stakeAddress}
 		<div class="flex items-center">
@@ -94,7 +94,7 @@
 </td>
 
 <td
-	class="hidden border-b border-gray-200 py-4 px-2 sm:px-3 text-sm font-medium text-secondary-content"
+	class="hidden border-b border-neutral py-4 px-2 sm:px-3 text-sm font-medium text-secondary-content"
 >
 	<div class="flex items-center">
 		<a
@@ -114,7 +114,7 @@
 </td>
 
 <td
-	class="hidden border-b border-gray-200 py-4 px-2 sm:px-3 text-sm text-center font-medium text-secondary-content xs:table-cell"
+	class="hidden border-b border-neutral py-4 px-2 sm:px-3 text-sm text-center font-medium text-secondary-content xs:table-cell"
 >
 	<p class="text-secondary-content tooltip tooltip-top">
 		<span class="whitespace-pre-wrap w-[1rem] text-center sm:whitespace-nowrap"
@@ -126,7 +126,7 @@
 </td>
 
 <td
-	class="border-b border-gray-200 py-4 px-2 sm:px-3 text-sm text-center font-medium text-secondary-content"
+	class="border-b border-neutral py-4 px-2 sm:px-3 text-sm text-center font-medium text-secondary-content"
 >
 	<p class="text-secondary-content tooltip tooltip-top">
 		<span class="text-center"
@@ -138,19 +138,19 @@
 </td>
 
 <td
-	class="hidden border-b border-gray-200 py-4 px-2 sm:px-3 text-sm text-center font-medium text-secondary-content sm:table-cell"
+	class="hidden border-b border-neutral py-4 px-2 sm:px-3 text-sm text-center font-medium text-secondary-content sm:table-cell"
 >
 	{licenseHolder.hasLicenseMult && !licenseHolder.isNFTExchange ? '5%' : '-'}
 </td>
 
 <td
-	class="hidden border-b border-gray-200 py-4 px-2 sm:px-3 text-sm text-center lg:w-min font-medium text-secondary-content sm:table-cell"
+	class="hidden border-b border-neutral py-4 px-2 sm:px-3 text-sm text-center lg:w-min font-medium text-secondary-content sm:table-cell"
 >
 	{licenseHolder.hasMinFACTMult && !licenseHolder.isNFTExchange ? '10%' : '-'}
 </td>
 
 <td
-	class="border-b border-gray-200 py-4 px-2 sm:px-3 text-sm text-center lg:w-min font-medium text-secondary-content"
+	class="border-b border-neutral py-4 px-2 sm:px-3 text-sm text-center lg:w-min font-medium text-secondary-content"
 >
 	{licenseHolder.isNFTExchange
 		? '-'
@@ -160,7 +160,7 @@
 </td>
 
 <td
-	class="border-x-2 border-primary border-b-gray-400 border-opacity-40 border-b bg-primary bg-opacity-30 py-4 px-2 sm:px-3 text-sm text-center w-[4rem] lg:w-min font-medium text-secondary-content"
+	class="border-x-2 border-primary border-b-neutral border-opacity-40 border-b bg-primary bg-opacity-30 py-4 px-2 sm:px-3 text-sm text-center w-[4rem] lg:w-min font-medium text-secondary-content"
 >
 	{licenseHolder.isNFTExchange
 		? '-'

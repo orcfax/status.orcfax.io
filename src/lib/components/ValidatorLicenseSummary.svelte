@@ -51,7 +51,7 @@
 		Validator License Summary
 	</h1>
 	<div
-		class="flex flex-col justify-center items-center p-8 shadow-sm border border-gray-200 rounded-lg bg-secondary gap-4"
+		class="flex flex-col justify-center items-center p-8 shadow-sm border border-neutral rounded-lg bg-secondary gap-4"
 	>
 		<h2 class="text-3xl text-center text-primary font-bold">Phase 1 of the Orcfax ITN is live!</h2>
 		<a
@@ -151,7 +151,7 @@
 		<div class="divider" />
 
 		<div class="flex flex-col gap-6 lg:flex-row">
-			<div role="alert" class="alert shadow-sm border border-gray-300">
+			<div role="alert" class="alert shadow-sm border border-neutral">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
@@ -169,7 +169,7 @@
 					All multipliers are now locked and will be used to calculate rewards for ITN participants.
 				</p>
 			</div>
-			<div role="alert" class="alert shadow-sm border border-gray-300">
+			<div role="alert" class="alert shadow-sm border border-neutral">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"

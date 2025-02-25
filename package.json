@@ -1,6 +1,6 @@
 {
 	"name": "status.orcfax.io",
-	"version": "2025-02-24",
+	"version": "2025-02-25",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
@@ -47,6 +47,7 @@
 		"dotenv": "^16.4.5",
 		"feed": "^4.2.2",
 		"lucide-svelte": "^0.399.0",
+		"marked": "^15.0.7",
 		"pocketbase": "^0.21.3",
 		"svelte-chartjs": "^3.1.5",
 		"tailwind-merge": "^2.3.0",
