@@ -28,8 +28,9 @@ export const ITNSnapshotRecordSchema = z.object({
 	currentFACT: z.number()
 });
 
-export const LicenseHolderRecordWithSnapshotsSchema = LicenseHolderRecordSchema.extend({
-	snapshots: z.array(ITNSnapshotRecordSchema)
+export const LicenseHolderRecordWithDataSchema = LicenseHolderRecordSchema.extend({
+	snapshots: z.array(ITNSnapshotRecordSchema),
+	licenses: z.array(ValidatorLicenseRecordSchema)
 });
 
 export const LicenseHolderSummarySchema = LicenseHolderRecordSchema.extend({
@@ -43,9 +44,7 @@ export type LicenseHolder = Omit<LicenseHolderRecord, 'id'>;
 export type ValidatorLicenseRecord = z.infer<typeof ValidatorLicenseRecordSchema>;
 export type ITNSnapshotRecord = z.infer<typeof ITNSnapshotRecordSchema>;
 export type ITNSnapshot = Omit<ITNSnapshotRecord, 'id'>;
-export type LicenseHolderRecordWithSnapshots = z.infer<
-	typeof LicenseHolderRecordWithSnapshotsSchema
->;
+export type LicenseHolderRecordWithData = z.infer<typeof LicenseHolderRecordWithDataSchema>;
 export type LicenseHolderSummary = z.infer<typeof LicenseHolderSummarySchema>;
 export interface ValidatorSummary {
 	licenseHolders: LicenseHolderSummary[];

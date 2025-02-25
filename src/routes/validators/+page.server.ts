@@ -1,121 +1,117 @@
 import PocketBase from 'pocketbase';
 import {
-	ITNSnapshotRecordSchema,
-	LicenseHolderRecordWithSnapshotsSchema,
-	ValidatorLicenseRecordSchema,
-	type ITNSnapshotRecord,
-	type LicenseHolderRecord,
-	type LicenseHolderRecordWithSnapshots,
-	type LicenseHolderSummary,
-	type ValidatorLicenseRecord,
+	LicenseHolderRecordWithDataSchema,
+	type LicenseHolderRecordWithData,
 	type ValidatorSummary
 } from '$lib/types';
-import { z } from 'zod';
-import { formatPercentageValue } from '$lib/client/helpers';
 
 export async function load({ locals }) {
 	return await getValidatorSummary(locals.pb);
 }
 
 async function getValidatorSummary(pb: PocketBase): Promise<ValidatorSummary> {
-	const licenseHolders = await getLicenseHoldersWithSnapshots(pb);
-	const licenses = await getValidatorLicenses(pb);
+	try {
+		const licenseHolders = await getLicenseHolders(pb);
+		const allLicenses = licenseHolders.flatMap((holder) => holder.licenses);
+		const licensesForSale = allLicenses.filter((license) => license.isForSale);
+		const licensesHeld = allLicenses.filter((license) => !license.isForSale);
 
-	const licenseHolderSummaries: LicenseHolderSummary[] = [];
-	licenseHolders.forEach((holder) => {
-		const licensesHeld = licenses
-			.filter((license) => license.holder === holder.id)
-			.sort((a, b) => a.licenseNumber - b.licenseNumber);
+		// Process license holders and create summaries
+		const licenseHolderSummaries = licenseHolders.map((holder) => {
+			const licensesHeld = holder.licenses || [];
+			licensesHeld.sort((a, b) => a.licenseNumber - b.licenseNumber);
 
-		const licenseMult = holder.hasLicenseMult ? 0.05 : 0;
-		const minFACTMult = holder.hasMinFACTMult ? 0.1 : 0;
-		const averageFACTMult = holder.averageFACTMult ?? 0;
-		const totalITNMultiplier = licenseMult + minFACTMult + averageFACTMult;
+			const licenseMult = holder.hasLicenseMult ? 0.05 : 0;
+			const minFACTMult = holder.hasMinFACTMult ? 0.1 : 0;
+			const averageFACTMult = holder.averageFACTMult ?? 0;
+			const totalITNMultiplier = licenseMult + minFACTMult + averageFACTMult;
 
-		licenseHolderSummaries.push({
-			...holder,
-			licensesHeld,
-			isNFTExchange: licensesHeld.some((license) => license.isForSale),
-			totalITNMultiplier
+			return {
+				...holder,
+				licensesHeld,
+				isNFTExchange: licensesHeld.some((license) => license.isForSale),
+				totalITNMultiplier
+			};
 		});
-	});
 
-	licenseHolderSummaries.sort((a, b) => {
-		const aTotal = parseFloat(formatPercentageValue(a.totalITNMultiplier));
-		const bTotal = parseFloat(formatPercentageValue(b.totalITNMultiplier));
-		if (aTotal === bTotal) {
-			// If num1 is equal, sort by total ITN multiplier
-			return b.averageFACTHoldings - a.averageFACTHoldings;
-		}
-		// Otherwise, sort by num1
-		return bTotal - aTotal;
-	});
+		// Sort license holders efficiently
+		licenseHolderSummaries.sort((a, b) => {
+			// First sort by whether they have any licenses at all
+			const aHasLicenses = a.licensesHeld.length > 0;
+			const bHasLicenses = b.licensesHeld.length > 0;
+			if (aHasLicenses !== bHasLicenses) {
+				return bHasLicenses ? 1 : -1;
+			}
 
-	return {
-		licenseHolders: licenseHolderSummaries,
-		licensesHeldCount: licenses.filter((license) => license.isForSale === false).length,
-		licensesForSaleCount: licenses.filter((license) => license.isForSale === true).length
-	};
+			// Then sort by total ITN multiplier percentage
+			const multiplierDiff = b.totalITNMultiplier - a.totalITNMultiplier;
+			if (multiplierDiff !== 0) {
+				return multiplierDiff;
+			}
+
+			// Then sort by average FACT holdings
+			if (a.averageFACTHoldings !== b.averageFACTHoldings) {
+				return b.averageFACTHoldings - a.averageFACTHoldings;
+			}
+
+			// Finally sort by current FACT holdings
+			return b.currentFACTHoldings - a.currentFACTHoldings;
+		});
+
+		return {
+			licenseHolders: licenseHolderSummaries,
+			licensesHeldCount: licensesHeld.length,
+			licensesForSaleCount: licensesForSale.length
+		};
+	} catch (error) {
+		console.error('Error in getValidatorSummary:', error);
+		return {
+			licenseHolders: [],
+			licensesHeldCount: 0,
+			licensesForSaleCount: 0
+		};
+	}
 }
 
-async function getLicenseHoldersWithSnapshots(
-	pb: PocketBase
-): Promise<LicenseHolderRecordWithSnapshots[]> {
+async function getLicenseHolders(pb: PocketBase): Promise<LicenseHolderRecordWithData[]> {
 	try {
-		const records = await pb.collection('license_holders').getFullList<LicenseHolderRecord>();
-
-		// Get snapshots for each holder
-		const holderSnapshotResponses: { holderID: string; snapshots: ITNSnapshotRecord[] }[] = [];
-		for (const holder of records) {
-			holderSnapshotResponses.push(await getITNSnapshotsByHolderID(pb, holder.id));
-		}
-
-		// Combine holder records with snapshots
-		const holdersWithSnapshots = records.map((holder) => {
-			const snapshotsForHolder =
-				holderSnapshotResponses.find((response) => response.holderID === holder.id)?.snapshots ??
-				[];
-			return { ...holder, snapshots: snapshotsForHolder };
+		const response = await pb.collection('license_holders').getFullList({
+			expand: 'itn_snapshots_via_wallet,validator_licenses_via_holder'
 		});
 
-		const parsedHolders = z
-			.array(LicenseHolderRecordWithSnapshotsSchema)
-			.parse(holdersWithSnapshots);
+		const licenseHolders: LicenseHolderRecordWithData[] = response.map((licenseHolderRecord) => {
+			return LicenseHolderRecordWithDataSchema.parse({
+				...licenseHolderRecord,
+				snapshots: licenseHolderRecord.expand?.itn_snapshots_via_wallet || [],
+				licenses: licenseHolderRecord.expand?.validator_licenses_via_holder || []
+			});
+		});
 
-		return parsedHolders;
+		return licenseHolders;
 	} catch (error) {
 		console.error(`Error retrieving license holder records: ${error}`);
 		return [];
 	}
 }
 
-async function getValidatorLicenses(pb: PocketBase): Promise<ValidatorLicenseRecord[]> {
-	try {
-		const records = await pb
-			.collection<ValidatorLicenseRecord>('validator_licenses')
-			.getFullList({ expand: 'holder' });
-		const parsedLicenses = z.array(ValidatorLicenseRecordSchema).parse(records);
+// async function getValidatorLicenses(pb: PocketBase): Promise<ValidatorLicenseRecord[]> {
+// 	try {
+// 		const records = await pb.collection<ValidatorLicenseRecord>('validator_licenses').getFullList({
+// 			expand: 'holder'
+// 		});
+// 		return z.array(ValidatorLicenseRecordSchema).parse(records);
+// 	} catch (error) {
+// 		console.error(`Error retrieving Validator License records: ${error}`);
+// 		return [];
+// 	}
+// }
 
-		return parsedLicenses;
-	} catch (error) {
-		console.error(`Error retrieving Validator License records: ${error}`);
-		return [];
-	}
-}
-
-async function getITNSnapshotsByHolderID(
-	pb: PocketBase,
-	holderID: string
-): Promise<{ holderID: string; snapshots: ITNSnapshotRecord[] }> {
-	try {
-		const records = await pb.collection<ITNSnapshotRecord>('itn_snapshots').getFullList({
-			filter: `wallet="${holderID}"`
-		});
-		const parsedRecords = z.array(ITNSnapshotRecordSchema).parse(records);
-
-		return { holderID, snapshots: parsedRecords };
-	} catch (error) {
-		console.error(`Error retrieving ITN snapshots by holder ID: ${error}`);
-		return { holderID, snapshots: [] };
-	}
-}
+// async function getAllITNSnapshots(pb: PocketBase): Promise<ITNSnapshotRecord[]> {
+// 	try {
+// 		const records = await pb.collection<ITNSnapshotRecord>('itn_snapshots').getFullList();
+// 		return z.array(ITNSnapshotRecordSchema).parse(records);
+// 	} catch (error) {
+// 		console.error(`Error retrieving ITN snapshots: ${error}`);
+// 		return [];
+// 	}
+// }
