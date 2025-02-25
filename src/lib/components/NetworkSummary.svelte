@@ -170,26 +170,26 @@
 					<div class="border border-neutral rounded-lg p-4 bg-base-100 w-fit relative">
 						<!-- Header skeleton -->
 						<div class="flex items-center gap-2 mb-4">
-							<div class="bg-gray-100 dark:bg-gray-500 animate-pulse w-1.5 h-8 rounded-full"></div>
-							<div class="bg-gray-100 dark:bg-gray-500 animate-pulse h-8 w-40 rounded"></div>
+							<div class="bg-neutral animate-pulse w-1.5 h-8 rounded-full"></div>
+							<div class="bg-neutral animate-pulse h-8 w-40 rounded"></div>
 						</div>
 
 						<!-- Stats skeleton -->
 						<div class="gap-4 mb-4 grid grid-cols-2">
-							<div class="bg-gray-100 dark:bg-gray-500 animate-pulse h-16 w-32 rounded"></div>
-							<div class="bg-gray-100 dark:bg-gray-500 animate-pulse h-16 w-32 rounded"></div>
+							<div class="bg-neutral animate-pulse h-16 w-32 rounded"></div>
+							<div class="bg-neutral animate-pulse h-16 w-32 rounded"></div>
 						</div>
 
 						<!-- Sources box skeleton -->
 						<div class="border border-neutral rounded-lg p-3 mb-4 bg-base-200">
-							<div class="bg-gray-100 dark:bg-gray-500 animate-pulse h-24 w-full rounded"></div>
+							<div class="bg-neutral animate-pulse h-24 w-full rounded"></div>
 						</div>
 
 						<!-- Bottom info skeleton -->
 						<div class="space-y-2">
-							<div class="bg-gray-100 dark:bg-gray-500 animate-pulse h-4 w-full rounded"></div>
-							<div class="bg-gray-100 dark:bg-gray-500 animate-pulse h-4 w-full rounded"></div>
-							<div class="bg-gray-100 dark:bg-gray-500 animate-pulse h-4 w-full rounded"></div>
+							<div class="bg-neutral animate-pulse h-4 w-full rounded"></div>
+							<div class="bg-neutral animate-pulse h-4 w-full rounded"></div>
+							<div class="bg-neutral animate-pulse h-4 w-full rounded"></div>
 						</div>
 					</div>
 				{/each}
