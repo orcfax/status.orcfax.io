@@ -220,7 +220,9 @@ export const DBPolicySchema = PolicySchema.extend({
 export type DBPolicy = z.infer<typeof DBPolicySchema>;
 
 export const NetworkSchema = DBNetworkSchema.extend({
-	policies: z.array(PolicySchema),
+	policies: z
+		.array(PolicySchema)
+		.transform((val) => val.sort((a, b) => b.starting_slot - a.starting_slot)),
 	nodes: z.array(NodeSchema),
 	sources: z.array(SourceSchema),
 	feeds: z.array(FeedSchema)

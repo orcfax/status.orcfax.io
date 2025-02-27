@@ -26,7 +26,7 @@
 		>
 			<h3 class="font-semibold">{notification.title}</h3>
 			<p class="text-base-content text-sm mt-1">{@html marked(notification.description)}</p>
-			<div class="mt-2 flex gap-2 items-center">
+			<div class="mt-3 flex gap-2 items-center flex-wrap">
 				{#if notification.status}
 					<span class="text-xs {statusClass} px-2 py-1 rounded">
 						{formatStatus(notification.status)}

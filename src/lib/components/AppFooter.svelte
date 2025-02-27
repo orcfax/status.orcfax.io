@@ -18,7 +18,7 @@
 			<img class="w-12 bg-primary rounded-full" src={orcfaxLogo} alt="Orcfax Logo" />
 		</a>
 
-		<p class="text-sm font-medium">Copyright © Orcfax Ltd. ${currentYear}</p>
+		<p class="text-sm font-medium">Copyright © Orcfax Ltd. {currentYear}</p>
 	</div>
 
 	<div class="flex flex-col xs:flex-row items-center justify-center gap-4">

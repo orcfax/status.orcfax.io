@@ -17,21 +17,21 @@
 	})();
 </script>
 
-<section id="rss-subscription" class="w-fit">
-	<h2 class="text-2xl font-bold mb-4">Orcfax Network Status RSS Feed</h2>
+<section id="rss-subscription" class="w-full max-w-fit">
+	<h2 class="text-2xl font-bold mb-4">Orcfax RSS Feed</h2>
 	<p class="text-base-content opacity-60 mb-4">
-		Stay informed about the Orcfax network with incident reports, and other important network
-		updates
+		Stay informed about the status of the Orcfax network with incident reports, and other important
+		network updates
 	</p>
 
-	<div class="bg-base-100 border border-neutral rounded-lg p-6 space-y-6 w-fit">
+	<div class="bg-base-100 border border-neutral rounded-lg p-6 space-y-6 w-full">
 		<div>
 			<h3 class="font-semibold mb-2">RSS Feed URL Builder</h3>
 
 			<div
-				class="inline-grid grid-cols-1 md:grid-cols-2 md:divide-x divide-base-content/20 gap-2 md:gap-0 mb-4"
+				class="inline-grid grid-cols-1 sm:grid-cols-2 sm:divide-x divide-base-content/20 gap-2 sm:gap-0 mb-4"
 			>
-				<div class="md:pr-6">
+				<div class="sm:pr-6">
 					<h4 class="text-sm font-medium text-base-content mb-2">Feed Format</h4>
 					<div class="space-y-2">
 						<label class="flex items-center">
@@ -49,9 +49,9 @@
 					</div>
 				</div>
 
-				<div class="md:hidden h-px bg-base-content/20 my-4" />
+				<div class="sm:hidden h-px bg-base-content/20 my-4" />
 
-				<div class="md:pl-6">
+				<div class="sm:pl-6">
 					<h4 class="text-sm font-medium text-base-content mb-2">Content Filter</h4>
 					<div class="space-y-2">
 						<label class="flex items-center">
@@ -75,8 +75,11 @@
 				</div>
 			</div>
 
-			<div class="w-fit flex items-center gap-2">
-				<code class="block bg-base-200 p-2 rounded border border-neutral">{feedUrl}</code>
+			<div class="w-full max-w-fit flex items-center gap-2 overflow-hidden">
+				<code
+					class="block bg-base-200 p-2 rounded border border-neutral overflow-x-auto flex-1 text-sm"
+					>{feedUrl}</code
+				>
 				<CopyToClipboard value={feedUrl} />
 			</div>
 		</div>
