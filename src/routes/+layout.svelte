@@ -29,10 +29,9 @@
 <!-- Setup Privacy-preserving Umami Analytics -->
 <svelte:head>
 	<script
-		async
 		defer
-		data-website-id="19e9527d-2fc1-4905-a49b-024bc39e2ca5"
-		src="https://analytics.server.orcfax.io/umami.js"
+		src="https://analytics.server.orcfax.io/script.js"
+		data-website-id="fba893e0-edb9-408d-ac35-ba036050eba4"
 	></script>
 </svelte:head>
 
