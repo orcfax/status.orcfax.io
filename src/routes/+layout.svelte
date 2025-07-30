@@ -31,7 +31,7 @@
 	<script
 		defer
 		src="https://analytics.server.orcfax.io/script.js"
-		data-website-id="fba893e0-edb9-408d-ac35-ba036050eba4"
+		data-website-id="8a12962d-c5cf-40b7-9f28-9263b4e1cfb8"
 	></script>
 </svelte:head>
 
